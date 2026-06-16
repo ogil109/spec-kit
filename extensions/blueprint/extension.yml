@@ -1,0 +1,57 @@
+schema_version: "1.0"
+
+extension:
+  id: blueprint
+  name: "Blueprint Waterfall Harness"
+  version: "1.0.0"
+  description: "An authoritative, collapsing blueprint + a deterministic oracle and an autonomous driver that builds a project slice-by-slice through the spec-kit waterfall."
+  category: process
+  effect: read-write
+  author: spec-kit-community
+  repository: https://github.com/github/spec-kit
+  license: MIT
+  homepage: https://github.com/github/spec-kit/tree/main/extensions/blueprint
+
+requires:
+  speckit_version: ">=0.10.0"
+
+provides:
+  commands:
+    - name: speckit.blueprint.init
+      file: commands/speckit.blueprint.init.md
+      description: "Scaffold the blueprint (optionally seeded from an existing master/overview doc) as the backlog + architecture map"
+    - name: speckit.blueprint.next
+      file: commands/speckit.blueprint.next.md
+      description: "Print the single next waterfall action (deterministic), derived from specs/ and the blueprint"
+    - name: speckit.blueprint.status
+      file: commands/speckit.blueprint.status.md
+      description: "Show the waterfall worklist: in-flight slices and their next phase, distill drift, and the next action"
+    - name: speckit.blueprint.distill
+      file: commands/speckit.blueprint.distill.md
+      description: "Collapse a finalized spec's blueprint section to an at-a-glance digest + a pointer to the spec"
+    - name: speckit.blueprint.drive
+      file: commands/speckit.blueprint.drive.md
+      description: "Autonomously drive the waterfall: loop the backlog through specify→clarify→plan→tasks→implement, distilling as you go, re-grounding on the oracle each step"
+
+  config:
+    - name: "blueprint-config.yml"
+      template: "config-template.yml"
+      description: "Blueprint location and distillation behavior"
+      required: false
+
+  scripts:
+    - "scripts/bash/blueprint-state.sh"
+    - "scripts/powershell/blueprint-state.ps1"
+
+tags:
+  - "blueprint"
+  - "workflow"
+  - "autonomous"
+  - "waterfall"
+  - "distillation"
+
+defaults:
+  blueprint:
+    path: ".specify/memory/blueprint.md"
+  distill:
+    require_confirmation: true

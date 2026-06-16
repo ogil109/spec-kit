@@ -11,6 +11,15 @@
       "version": "1.0.0",
       "url": "https://raw.githubusercontent.com/github/spec-kit/main/workflows/speckit/workflow.yml",
       "tags": ["sdd", "full-cycle"]
+    },
+    "blueprint-waterfall": {
+      "id": "blueprint-waterfall",
+      "name": "Blueprint Waterfall (autonomous build)",
+      "description": "Unattended waterfall: loop the blueprint backlog through specify → clarify → plan → tasks → implement, distilling as you go. Requires the blueprint extension.",
+      "author": "spec-kit-community",
+      "version": "1.0.0",
+      "url": "https://raw.githubusercontent.com/github/spec-kit/main/workflows/blueprint-waterfall/workflow.yml",
+      "tags": ["autonomous", "waterfall", "blueprint"]
     }
   }
 }

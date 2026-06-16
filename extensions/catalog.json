@@ -17,6 +17,22 @@
         "core"
       ]
     },
+    "blueprint": {
+      "name": "Blueprint Waterfall Harness",
+      "id": "blueprint",
+      "version": "1.0.0",
+      "description": "An authoritative, collapsing blueprint + a deterministic oracle and an autonomous driver that builds a project slice-by-slice through the spec-kit waterfall. Pairs with the blueprint-waterfall workflow.",
+      "author": "spec-kit-community",
+      "repository": "https://github.com/github/spec-kit",
+      "bundled": true,
+      "tags": [
+        "blueprint",
+        "workflow",
+        "autonomous",
+        "waterfall",
+        "distillation"
+      ]
+    },
     "bug": {
       "name": "Bug Triage Workflow",
       "id": "bug",

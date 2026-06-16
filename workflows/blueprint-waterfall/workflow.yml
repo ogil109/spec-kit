@@ -1,0 +1,43 @@
+schema_version: "1.0"
+
+workflow:
+  id: "blueprint-waterfall"
+  name: "Blueprint Waterfall (autonomous build)"
+  version: "1.0.0"
+  author: "spec-kit-community"
+  description: "Run the project's build as an unattended waterfall: loop the blueprint backlog through specify→clarify→plan→tasks→implement, distilling as you go, re-grounding on the deterministic oracle each step."
+
+requires:
+  speckit_version: ">=0.10.0"
+  # The blueprint extension supplies the deterministic oracle and the driver command.
+  integrations:
+    any:
+      - "claude"
+      - "copilot"
+      - "gemini"
+      - "opencode"
+
+inputs:
+  integration:
+    type: string
+    default: "auto"
+    prompt: "Integration to use (claude, copilot, gemini; 'auto' = project default)"
+  max_steps:
+    type: number
+    default: 25
+    prompt: "Hard cap on phase-steps before stopping"
+  stop_before:
+    type: string
+    default: ""
+    prompt: "Stop when the next action would be this phase (e.g. 'implement'); empty = run to done"
+
+steps:
+  # The driver is one headless agent invocation that runs the whole loop, asking
+  # the deterministic oracle (blueprint-state.sh) what to do next every iteration,
+  # so it cannot drift over a long run. The workflow provides the run entry point,
+  # persisted run-state, and resumability around it.
+  - id: drive
+    command: speckit.blueprint.drive
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "max_steps={{ inputs.max_steps }} stop_before={{ inputs.stop_before }}"
